@@ -1,0 +1,6 @@
+{
+	"name": "node-tests",
+	"scripts": {
+		"default": "node index.js"
+	}
+}
