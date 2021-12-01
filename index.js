@@ -31,6 +31,22 @@ const testF = () => {
 	console.log("Test F completed.");
 }
 
+const testG = (firstParam, secondParam) => {
+	console.log("Test G completed and it's params were " + firstParam + " and " + secondParam);
+}
+
+const testH = () => {
+	console.log("Test H completed.");
+}
+
+const testI = () => {
+	console.log("Test I completed.");
+}
+
+const testJ = () => {
+	console.log("Test J completed.");
+}
+
 readline.question(`What is your name, pal?:\n`, res => {
 	const wordsArray = res.split(' ')
 	let safeLength = wordsArray.length > 0 ? wordsArray.length - 1 : 0
@@ -46,12 +62,25 @@ readline.question(`What is your name, pal?:\n`, res => {
 		testD(resolve);
 	})
 	testC()
+
 	process.nextTick(() => {
 		testE()
 	})
+
 	setImmediate(() => {
 		testF()
 	})
+
+	setTimeout(testG, 2000, "dog", "cat")
+	const timeID = setTimeout(testH, 3000)
+	clearTimeout(timeID)
+
+	const timeID3 = setInterval(() => {
+		testI()
+		if (Math.random() > 0.5) {
+			clearTimeout(timeID3)
+		}
+	}, 2000)
 
 	readline.close()
 })
