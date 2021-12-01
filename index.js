@@ -27,6 +27,10 @@ const testE = () => {
 	console.log("Test E completed.");
 }
 
+const testF = () => {
+	console.log("Test F completed.");
+}
+
 readline.question(`What is your name, pal?:\n`, res => {
 	const wordsArray = res.split(' ')
 	let safeLength = wordsArray.length > 0 ? wordsArray.length - 1 : 0
@@ -44,6 +48,9 @@ readline.question(`What is your name, pal?:\n`, res => {
 	testC()
 	process.nextTick(() => {
 		testE()
+	})
+	setImmediate(() => {
+		testF()
 	})
 
 	readline.close()
