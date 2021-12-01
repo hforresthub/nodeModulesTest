@@ -47,6 +47,15 @@ const testJ = () => {
 	console.log("Test J completed.");
 }
 
+const testK = () => {
+	console.log("Test K completed.");
+	if (Math.random() > 0.25) {
+		setTimeout(() => {
+			testK()
+		}, 1000)
+	}
+}
+
 readline.question(`What is your name, pal?:\n`, res => {
 	const wordsArray = res.split(' ')
 	let safeLength = wordsArray.length > 0 ? wordsArray.length - 1 : 0
@@ -56,7 +65,7 @@ readline.question(`What is your name, pal?:\n`, res => {
 	// execution order tests
 	setTimeout(testA, 1000)
 	setTimeout(testB, 0)
-	new Promise ((resolve, reject) => {
+	new Promise((resolve, reject) => {
 		resolve("Test D completed.")
 	}).then((resolve) => {
 		testD(resolve);
@@ -75,12 +84,21 @@ readline.question(`What is your name, pal?:\n`, res => {
 	const timeID = setTimeout(testH, 3000)
 	clearTimeout(timeID)
 
+	const timeID2 = setInterval(testI, 2000)
+	setTimeout(clearTimeout, 5000, timeID2)
+
+	// interval test
 	const timeID3 = setInterval(() => {
-		testI()
-		if (Math.random() > 0.5) {
+		testJ()
+		if (Math.random() > 0.75) {
 			clearTimeout(timeID3)
 		}
 	}, 2000)
+
+	// recursive timeout test
+	setTimeout(() => {
+		testK()
+	}, 1000)
 
 	readline.close()
 })
